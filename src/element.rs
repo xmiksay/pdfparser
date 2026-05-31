@@ -1,9 +1,9 @@
 //! Internal element types and per-page layout context for the PDF pipeline.
 
-use crate::ImageEmitter;
-use crate::PdfFigure as Figure;
 use super::headings::FontSignature;
 use super::zone::{BBox, Bounded};
+use crate::ImageEmitter;
+use crate::PdfFigure as Figure;
 
 // ---- internal element types --------------------------------------------------
 

@@ -6,10 +6,10 @@ use std::io::Cursor;
 use pdfium_render::prelude::*;
 use sha2::{Digest, Sha256};
 
-use crate::PdfError as PreprocessorError;
-use crate::PdfFigure as Figure;
 use super::element::{PageCtx, TextElement};
 use super::headings::{FontSignature, HeadingClassifier};
+use crate::PdfError as PreprocessorError;
+use crate::PdfFigure as Figure;
 
 // ---- line / paragraph types -------------------------------------------------
 

@@ -15,15 +15,15 @@ use super::borders::{
     HLine, LINE_MIN_LENGTH, Line as BorderLine, TableRegion, VLine, classify_segment,
     detect_figure_regions, detect_table_regions,
 };
-use crate::PdfError as PreprocessorError;
-use crate::PdfDocument as ExtractedDoc;
-use crate::{ExtractConfig, PdfFigure as Figure, get_pdfium};
 use super::element::{ImageElement, PageCtx, PageElement, TextElement};
 use super::headings::{FontSignature, HeadingClassifier};
 use super::noise::strip_noise_headings;
 use super::render::emit_zone;
 use super::text::{encode_figure_png, extract_image_figure, font_signature_from_text_object};
 use super::zone::{BBox, SegmentParams};
+use crate::PdfDocument as ExtractedDoc;
+use crate::PdfError as PreprocessorError;
+use crate::{ExtractConfig, PdfFigure as Figure, get_pdfium};
 
 // ---- vector-figure rasterization --------------------------------------------
 

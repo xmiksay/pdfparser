@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  lint:
+    name: rustfmt + clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: rustfmt
+        run: cargo fmt --all -- --check
+
+      - name: clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+  test:
+    name: build + test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      # libpdfium is only needed for end-to-end runs against real PDFs
+      # (no such test exists yet — all unit tests are synthetic). Build
+      # and `cargo test --lib` succeed without it because pdfium-render
+      # binds via libloading at runtime, not at link time.
+      - name: build (all targets, all features)
+        run: cargo build --all-targets --all-features
+
+      - name: test (library)
+        run: cargo test --lib --all-features
+
+      - name: build (library, no default features)
+        run: cargo build --lib --no-default-features
