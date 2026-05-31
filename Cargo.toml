@@ -2,9 +2,24 @@
 name = "pdf2md"
 version = "0.1.0"
 edition = "2024"
-description = "PDF → Markdown extractor with figure rasterization, table & banner detection"
+rust-version = "1.85"
+description = "PDF → Markdown extractor with figure rasterization, table & banner detection. Built on pdfium-render."
 license = "MIT"
 authors = ["Martin Miksanik <miksanik@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/xmiksay/pdfparser"
+homepage = "https://github.com/xmiksay/pdfparser"
+documentation = "https://docs.rs/pdf2md"
+keywords = ["pdf", "markdown", "pdfium", "extract", "converter"]
+categories = ["text-processing", "parsing", "command-line-utilities"]
+# Keep the published tarball lean: source + license + readme + changelog only.
+include = [
+    "src/**/*.rs",
+    "Cargo.toml",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+]
 
 [lib]
 name = "pdf2md"
@@ -32,3 +47,8 @@ clap = { version = "4", features = ["derive"], optional = true }
 
 [dev-dependencies]
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+
+# docs.rs builds with --all-features so the CLI binary is documented too.
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
