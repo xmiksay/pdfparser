@@ -1,0 +1,34 @@
+[package]
+name = "pdf2md"
+version = "0.1.0"
+edition = "2024"
+description = "PDF → Markdown extractor with figure rasterization, table & banner detection"
+license = "MIT"
+authors = ["Martin Miksanik <miksanik@gmail.com>"]
+
+[lib]
+name = "pdf2md"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pdf2md"
+path = "src/bin/pdf2md.rs"
+required-features = ["cli"]
+
+[features]
+default = ["cli"]
+cli = ["dep:clap"]
+
+[dependencies]
+pdfium-render = "0.9"
+sha2 = "0.11"
+hex = "0.4"
+tracing = "0.1"
+thiserror = "1"
+tokio = { version = "1", features = ["rt", "macros"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+regex = "1"
+clap = { version = "4", features = ["derive"], optional = true }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
