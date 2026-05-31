@@ -28,7 +28,7 @@ pub(super) fn median_item_height<T: Bounded>(items: &[T]) -> Option<f32> {
     let mut hs: Vec<f32> = items.iter().map(|it| it.bbox().height()).collect();
     hs.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal));
     let mid = hs.len() / 2;
-    Some(if hs.len().is_multiple_of(2) {
+    Some(if hs.len() % 2 == 0 {
         (hs[mid - 1] + hs[mid]) / 2.0
     } else {
         hs[mid]
@@ -72,7 +72,7 @@ pub(super) fn median_band_char_count<T: Bounded>(items: &[&T], y_tol: f32) -> us
     bands.push(cur_chars);
     bands.sort_unstable();
     let mid = bands.len() / 2;
-    if bands.len().is_multiple_of(2) {
+    if bands.len() % 2 == 0 {
         (bands[mid - 1] + bands[mid]) / 2
     } else {
         bands[mid]

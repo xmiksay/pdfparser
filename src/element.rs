@@ -131,7 +131,7 @@ pub(super) fn median(values: &mut [f32]) -> Option<f32> {
     }
     values.sort_by(|a, b| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal));
     let mid = values.len() / 2;
-    Some(if values.len().is_multiple_of(2) {
+    Some(if values.len() % 2 == 0 {
         (values[mid - 1] + values[mid]) / 2.0
     } else {
         values[mid]

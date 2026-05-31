@@ -24,7 +24,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: dtolnay/rust-toolchain@stable
+      # Reads rust-toolchain.toml so docs are built with the same compiler
+      # as CI and local development.
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - uses: Swatinem/rust-cache@v2
 

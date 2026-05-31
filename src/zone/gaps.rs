@@ -117,7 +117,7 @@ pub(super) fn median_height_of(bboxes: &[BBox], indices: &[usize]) -> f32 {
     let mut hs: Vec<f32> = indices.iter().map(|&i| bboxes[i].height()).collect();
     hs.sort_by(|a, b| a.partial_cmp(b).unwrap_or(Ordering::Equal));
     let mid = hs.len() / 2;
-    if hs.len().is_multiple_of(2) {
+    if hs.len() % 2 == 0 {
         (hs[mid - 1] + hs[mid]) / 2.0
     } else {
         hs[mid]

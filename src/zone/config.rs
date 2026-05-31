@@ -129,7 +129,7 @@ pub(super) fn build_partitioned_zone<T: Bounded>(
     // into the Y-slot they belong to.
     let mut region_buckets: HashMap<usize, Vec<T>> = HashMap::new();
     let mut slot_buckets: Vec<Vec<T>> = (0..=region_count).map(|_| Vec::new()).collect();
-    for (it, key) in items.into_iter().zip(assignment.into_iter()) {
+    for (it, key) in items.into_iter().zip(assignment) {
         match key {
             Some(r) => region_buckets.entry(r).or_default().push(it),
             None => {

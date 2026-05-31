@@ -138,7 +138,7 @@ impl HeadingClassifier {
                 ratio <= HEADING_DIVERSITY_MAX_RATIO
             })
             .collect();
-        candidates.sort_by(|a, b| b.0.size_bucket.cmp(&a.0.size_bucket));
+        candidates.sort_by_key(|c| std::cmp::Reverse(c.0.size_bucket));
         candidates.truncate(MAX_HEADING_DEPTH);
 
         Self {
